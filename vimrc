@@ -177,6 +177,7 @@ map <leader>b :FufBuffer<CR>
 " buffer helpers
 map <leader>l :ls<CR>
 map <leader>x <leader>bd<CR>
+map <leader>xx :bd<CR>
 map <leader>w :w<CR>
 
 imap <C-a> <ESC>^i
