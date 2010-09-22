@@ -46,12 +46,13 @@ set autowriteall        " Automatically save before commands like :next and :mak
 set hlsearch            " Highlight search match
 set hidden              " enable multiple modified buffers
 set nobackup            " do not write backup files
-"set noswapfile          " do not write .swp files
+set noswapfile          " do not write .swp files
 set foldcolumn=0        " columns for folding
 set foldmethod=indent
 set foldlevel=9
 set history=1000
 set wildmenu
+set wildmode=list:longest
 set ruler
 set visualbell
 set autoread            " automatically read feil that has been changed on disk and doesn't have changes in vim
@@ -76,11 +77,11 @@ set backupdir=~/.backup,.
 set directory=~/.backup,~/tmp,.
 
 " enable showmmarks
-let g:showmarks_enable = 1
-hi! link ShowMarksHLl LineNr
-hi! link ShowMarksHLu LineNr
-hi! link ShowMarksHLo LineNr
-hi! link ShowMarksHLm LineNr
+let g:showmarks_enable = 0
+"hi! link ShowMarksHLl LineNr
+"hi! link ShowMarksHLu LineNr
+"hi! link ShowMarksHLo LineNr
+"hi! link ShowMarksHLm LineNr
 
 " Make
 :command -nargs=* Make make <args> | cwindow 3
@@ -93,8 +94,6 @@ set completeopt=menuone,preview
 set ofu=syntaxcomplete#Complete
 let g:rubycomplete_buffer_loading = 0
 let g:rubycomplete_classes_in_global = 1
-" completing Rails hangs a lot
-"let g:rubycomplete_rails = 1
 
 " syntastic
 let g:syntastic_enable_signs=1
@@ -110,7 +109,7 @@ let mapleader = ","
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" highlight trailing whitespace  
+" highlight trailing whitespace
 set listchars=tab:▷⋅,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 
@@ -121,16 +120,11 @@ runtime macros/matchit.vim
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
-" Ctrl-N to disable search match highlight
-nmap <silent> <C-N> :silent noh<CR>
+" ` to disable search match highlight
+nmap <silent> ` :silent noh<CR>
 
 " Ctrol-E to switch between 2 last buffers
 nmap <C-E> :b#<CR>
-
-" Ctrl-P to Display the file browser tree
-nmap <C-P> :NERDTreeToggle<CR>
-" ,p to show current file in the tree
-nmap <leader>p :NERDTreeFind<CR>
 
 " ,/ to invert comment on the current line/selection
 nmap <leader>/ :call NERDComment(0, "invert")<cr>
@@ -138,23 +132,11 @@ vmap <leader>/ :call NERDComment(0, "invert")<cr>
 
 " ,t to show tags window
 let Tlist_Show_Menu=1
-nmap <leader>t :TlistToggle<CR>
-
-" ,e to fast finding files. just type beginning of a name and hit TAB
-nmap <leader>e :e **/
-
-" ,f to fast finding files using fuzzy finder.
-nmap <leader>f :FufFile **/<CR>
+nmap <leader>T :TlistToggle<CR>
 
 nmap <leader>S :SessionList<CR>
 nmap <leader>SS :SessionSave<CR>
 nmap <leader>SA :SessionSaveAs<CR>
-
-" ,b to display current buffers list
-let g:miniBufExplVSplit = 25
-let g:miniBufExplorerMoreThanOne = 100
-let g:miniBufExplUseSingleClick = 1
-nmap <Leader>b :MiniBufExplorer<cr>
 
 let g:Conque_Read_Timeout = 50 " timeout for waiting for command output.
 let g:Conque_TERM = 'xterm'
@@ -176,3 +158,55 @@ let g:yankring_replace_n_pkey = '<leader>['
 let g:yankring_replace_n_nkey = '<leader>]'
 
 set shell=/bin/bash
+
+" toggle Nerd tree
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+map <leader>ds :execute 'NERDTree'<CR>
+" ,p to show current file in the tree
+nmap <leader>p :NERDTreeFind<CR>
+
+" fuzzyfinder stuff
+let g:fuzzy_ignore = "*.log"
+let g:fuzzy_matching_limit = 70
+let g:snips_author = "Wil Stuckey <wil@etsy.com>"
+
+map <leader>t :CommandT<CR>
+map <leader>b :FufBuffer<CR>
+
+ 
+" buffer helpers
+map <leader>l :ls<CR>
+map <leader>x <leader>bd<CR>
+map <leader>w :w<CR>
+
+imap <C-a> <ESC>^i
+imap <C-e> <ESC>$a
+imap <C-u> <ESC>c^
+imap <C-k> <ESC>c$
+
+" syntax highlighting
+if has('syntax')
+    syntax on
+    filetype on
+    filetype plugin on
+    filetype indent on
+    set background=dark
+    colorscheme ir_black
+endif
+ 
+if has('gui_running')
+    set encoding=utf-8
+    set lines=70
+    set columns=180
+    set go-=T
+    set guioptions-=T
+    set guioptions-=m
+    set guifont=Inconsolata:h16
+    set showtabline=2
+    set guitablabel=%t
+    " show the cursor line
+    set cursorline
+else
+    set background=dark
+    colorscheme desert
+end
