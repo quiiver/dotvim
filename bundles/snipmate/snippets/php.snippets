@@ -41,7 +41,6 @@ snippet doc_cp
 	/**
 	 * ${1:undocumented class}
 	 *
-	 * @package ${2:default}
 	 * @author ${3:`g:snips_author`}
 	**/${4}
 # Class Variable - post doc
@@ -67,9 +66,8 @@ snippet doc_c
 	 * @packaged ${4:default}
 	 * @author ${5:`g:snips_author`}
 	 **/
-	${1:}class ${2:}
-	{${6}
-	} // END $1class $2
+	${1:}class ${2:} {${6}
+	}
 # Constant Definition - post doc
 snippet doc_dp
 	/**
@@ -106,8 +104,7 @@ snippet doc_f
 	 * @return ${5:void}
 	 * @author ${6:`g:snips_author`}
 	 **/
-	${1}function ${2}(${3})
-	{${7}
+	${1}function ${2}(${3}) {${7}
 	}
 # Header
 snippet doc_h
@@ -139,11 +136,9 @@ snippet class
 	/**
 	 * ${1}
 	 **/
-	class ${2:ClassName}
-	{
+	class ${2:ClassName} {
 		${3}
-		function ${4:__construct}(${5:argument})
-		{
+		function ${4:__construct}(${5:argument}) {
 			${6:// code...}
 		}
 	}
@@ -207,10 +202,11 @@ snippet foreach
 		${3:// code...}
 	}
 snippet fun
-	${1:public }function ${2:FunctionName}(${3})
-	{
+	${1:public }function ${2:FunctionName}(${3}) {
 		${4:// code...}
 	}
 # $... = array (...)
 snippet array
 	$${1:arrayName} = array('${2}' => ${3});${4}
+snippet th
+	$this->

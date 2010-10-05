@@ -1,4 +1,4 @@
-set nocompatible
+et nocompatible
 
 runtime! autoload/pathogen.vim
 if exists('g:loaded_pathogen')
@@ -98,6 +98,7 @@ let g:rubycomplete_classes_in_global = 1
 " syntastic
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
+let g:syntastic_disabled_filetypes = ['html']
 
 " delimitMate
 let g:delimitMate_expand_space = 1
@@ -112,6 +113,8 @@ map Q gq
 " highlight trailing whitespace
 set listchars=tab:▷⋅,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
+" show invisibles
+set list
 
 " extended '%' mapping for if/then/else/end etc
 runtime macros/matchit.vim
@@ -177,7 +180,7 @@ map <leader>b :FufBuffer<CR>
 " buffer helpers
 map <leader>l :ls<CR>
 map <leader>x <leader>bd<CR>
-map <leader>xx :bd<CR>
+map <leader>dx :bd<CR>
 map <leader>w :w<CR>
 
 imap <C-a> <ESC>^i
@@ -192,7 +195,7 @@ if has('syntax')
     filetype plugin on
     filetype indent on
     set background=dark
-    colorscheme ir_black
+    colorscheme twilight
 endif
  
 if has('gui_running')
@@ -211,3 +214,15 @@ else
     set background=dark
     colorscheme desert
 end
+
+set ls=2
+set showmode
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+ 
+autocmd Filetype c,cpp,h,python,html,css,js,xml set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd Filetype scala set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd Filetype php set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd BufRead,BufNewFile *.tpl set filetype=html
