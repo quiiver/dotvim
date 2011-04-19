@@ -6,14 +6,6 @@
       {a, b} = c
        └──┴─ these should be highlighted as identifiers
 
-- Assignments inside brackets (sounds simple enough):
-
-      a[b -= c] = d
-
-  this should still be highlighted correctly:
-
-      a[b[c]] = d
-
 - Smart, lookback outdenting for cases like:
 
       a = {
@@ -22,14 +14,13 @@
         }
       └─ bracket should be put here
 
-- Should indent if the previous line ends, or the current line starts, with one
-  of these:
+- Fix assignments with brackets in these cases:
 
-      + - * / % | & , . is isnt and or && || 
+      a[b] = c[d]
+      a[b -= c] = d
 
-- Support `else unless` in indentation:
+  and still highlight these correctly:
 
-      unless a
-        b
-      else unless c
-        d
+      a[b] = c
+      a[b[c]] = d
+      a[b[c] -= d] = e

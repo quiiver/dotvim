@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/wstuckey/Projects/lists'
+let g:netrw_dirhist_2='/Users/wstuckey/Projects/irsee'
+let g:netrw_dirhist_3='/Users/wstuckey/Projects/hives'
+let g:netrw_dirhist_4='/Users/wstuckey/Projects/analytics/lib/jobs/search_keyword_quality'
+let g:netrw_dirhist_5='/Users/wstuckey/Projects/wavetimer'

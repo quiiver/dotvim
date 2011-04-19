@@ -1,4 +1,4 @@
-et nocompatible
+set nocompatible
 
 runtime! autoload/pathogen.vim
 if exists('g:loaded_pathogen')
@@ -35,8 +35,8 @@ endif
 
 set number
 
-set textwidth=0         " Do not wrap words (insert)
-set nowrap              " Do not wrap words (view)
+"set textwidth=0         " Do not wrap words (insert)
+"set nowrap              " Do not wrap words (view)
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set ignorecase          " Do case insensitive matching
@@ -52,7 +52,7 @@ set foldmethod=indent
 set foldlevel=9
 set history=1000
 set wildmenu
-set wildmode=list:longest
+"set wildmode=list:longest,list,full
 set ruler
 set visualbell
 set autoread            " automatically read feil that has been changed on disk and doesn't have changes in vim
@@ -159,6 +159,7 @@ endif
 
 let g:yankring_replace_n_pkey = '<leader>['
 let g:yankring_replace_n_nkey = '<leader>]'
+let g:SimpleJsIndenter_BriefMode = 1
 
 set shell=/bin/bash
 
@@ -176,7 +177,6 @@ let g:snips_author = "Wil Stuckey <wil@etsy.com>"
 map <leader>t :CommandT<CR>
 map <leader>b :FufBuffer<CR>
 
- 
 " buffer helpers
 map <leader>l :ls<CR>
 map <leader>x <leader>bd<CR>
@@ -188,6 +188,19 @@ imap <C-e> <ESC>$a
 imap <C-u> <ESC>c^
 imap <C-k> <ESC>c$
 
+nnoremap <tab> %
+vnoremap <tab> %
+nnoremap j gj
+nnoremap k gk
+nnoremap ; :
+inoremap jj <ESC>
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+
 " syntax highlighting
 if has('syntax')
     syntax on
@@ -197,11 +210,9 @@ if has('syntax')
     set background=dark
     colorscheme twilight
 endif
- 
+
 if has('gui_running')
     set encoding=utf-8
-    set lines=70
-    set columns=180
     set go-=T
     set guioptions-=T
     set guioptions-=m
@@ -221,8 +232,28 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
- 
+set formatoptions=qrn1
+set ttyfast
+
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set nolist
+set scrolloff=4
+
+au FocusLost * :wa
+
 autocmd Filetype c,cpp,h,python,html,css,js,xml set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd Filetype scala set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd Filetype php set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd BufRead,BufNewFile *.tpl set filetype=html
+
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
