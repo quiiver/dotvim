@@ -76,6 +76,9 @@ hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 set backupdir=~/.backup,.
 set directory=~/.backup,~/tmp,.
 
+" enable auto compile for coffee script
+let coffee_compile_on_save = 1
+
 " enable showmmarks
 let g:showmarks_enable = 0
 "hi! link ShowMarksHLl LineNr
